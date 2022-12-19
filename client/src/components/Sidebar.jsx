@@ -4,7 +4,7 @@ import { logo, sun } from "../assets";
 import { navlinks} from '../constants';
 
 const Icon = ({styles,name,isActive,imgUrl,disabled,handleClick}) => {
-  <div>
+  <div className="">
 
   </div>
 }
