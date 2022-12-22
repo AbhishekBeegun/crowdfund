@@ -55,10 +55,21 @@ import { CommonSymbolSchema } from "@thirdweb-dev/sdk";
         }));
         return (parsedCampaigns)
     }
+ 
+
+    {/*Campaign created by owners PROFILE----fiter can be use for search campaign also or search by category */}
+    const getuserCampaigns = async () => {
+        const allCampaigns = await getCampaigns();
+        const filteredCampaigns = allCampaigns.filter((campaign) =>
+        campaign.owner === address);
+
+        return filteredCampaigns;
+
+    }
 
  return (
      <StateContext.Provider
-      value={{ address,contract,connect,createCampaign:publishCampaign,getCampaigns}}
+      value={{ address,contract,connect,createCampaign:publishCampaign,getCampaigns,getuserCampaigns}}
       >
         {children}
      </StateContext.Provider>

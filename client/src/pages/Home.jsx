@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import React ,{useState ,useEffect } from 'react';
 import { useStateContext } from "../context";
-import {DisplayCampaings} from "../components";
+import {DisplayCampaigns} from "../components";
 
 const Home = () => {
 
@@ -24,8 +24,8 @@ const Home = () => {
 
   } , [address,contract]);
   return (
-    <DisplayCampaings 
-    tiles="All Campaigns"
+    <DisplayCampaigns 
+    title="All Campaigns"
     isLoading={isLoading}
     campaigns={campaigns}
     />
