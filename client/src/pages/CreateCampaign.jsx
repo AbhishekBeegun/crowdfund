@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import {ethers} from 'ethers';
 
+import { useStateContext } from "../context";
+
 
 import { money } from "../assets";
 
@@ -10,7 +12,7 @@ import { CustomButton,FormField } from "../components";
 import {checkIfImage} from '../utils';
 const CreateCampaign = () => {
 
-
+  const { createCampaign } = useStateContext();
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
   const [form, setform] = useState({
@@ -27,11 +29,22 @@ const CreateCampaign = () => {
     setform({ ...form,[fieldName] : e.target.value})
   }
 
-  const handleSubmit = (e) => {
+  {/*onSubmit semd data to third web...spred form and check if image iss valid if not else executed----target:ethers.utils.parseUnits(form.target, 18) sanla obligatiore fer li akz ETH decimal places*/}
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(form);
-
+    checkIfImage(form.image,async(exists) =>{
+      if(exists){
+      setisLoading(true)
+      await createCampaign({ ...form,target:ethers.utils.parseUnits(form.target, 18)})
+      setisLoading(false);
+      navigate('/');
+    } else {
+      alert("Enter a Valid URL Eg:Google Search for image => Right Click select open image new tab copy link paste here")
+      setform({...form,image:""});
+    }
+   
+    })
   }
 
   return (

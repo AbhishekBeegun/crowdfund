@@ -11,6 +11,8 @@ export const daysLeft = (deadline) => {
     return percentage;
   };
   
+
+  {/*this utils checkimage verifie si url entered is valid */}
   export const checkIfImage = (url, callback) => {
     const img = new Image();
     img.src = url;
