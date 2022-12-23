@@ -30,6 +30,7 @@ const Home = () => {
     campaigns={campaigns}
     />
   )
+  {/*DisplayCampaign cAN be reuse in profile */}
 }
 
 export default Home

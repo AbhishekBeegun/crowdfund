@@ -1,6 +1,6 @@
 import React from "react";
 import { Route ,Routes } from "react-router-dom";
-import {CampaignDetails,CreateCampaign,Home,Profile} from "./pages/index";
+import {CampaignDetails,CreateCampaign,Home,Logout,Profile} from "./pages/index";
 import { Sidebar , Navbar} from "./components/index";
 
 
@@ -19,6 +19,7 @@ const App = () => {
           <Route path="/create-campaign" element={<CreateCampaign/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/campaign-details/:id" element={<CampaignDetails/>} />
+          <Route path="/logout" element={<Logout/>} />
 
         </Routes>
       </div>   

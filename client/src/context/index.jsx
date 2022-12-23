@@ -67,9 +67,31 @@ import { CommonSymbolSchema } from "@thirdweb-dev/sdk";
 
     }
 
+    {/**to accept doanation pId =>project Id given by thirdweb--- donateToCampaign dn smart contract*/}
+    const donate = async (pId,amount) => {
+        const data = await contract.call('donateToCampaign' , pId,{value:ethers.utils.parseEther(amount)});
+
+        return data;
+    }
+
+    const getDonations = async(pId) => {
+        const donations = await contract.all('getDonators', pId);
+        const numberofDonations = donations[0].length;
+
+        const parsedDonations = [];
+
+        for( let i = 0; i < numberofDonations; i++){
+            parsedDonations.push({
+                donator : donations[0][i],
+                donation : ethers.utils.formatEther(donations[1][i].toString)
+            })
+        }
+        return parsedDonations;
+    }
+
  return (
      <StateContext.Provider
-      value={{ address,contract,connect,createCampaign:publishCampaign,getCampaigns,getuserCampaigns}}
+      value={{ address,contract,connect,createCampaign:publishCampaign,getCampaigns,getuserCampaigns,donate,getDonations}}
       >
         {children}
      </StateContext.Provider>
