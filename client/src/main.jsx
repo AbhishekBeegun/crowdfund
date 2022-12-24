@@ -8,7 +8,7 @@ import './index.css';
 import { StateContextProvider } from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
+{/*PAyment not work check adress and donation address */}
 root.render(
   <ThirdwebProvider desiredChainId={ChainId.Goerli}> 
     <Router>
