@@ -6,8 +6,8 @@ const disconnect = useDisconnect();
 
   return (
     <div className="flex justify-center items-center">
-        <button className="w-full h-[100px] bg-red-300 text-white text-2xl"
-        onClick={disconnect}>Logout
+        <button className="w-1/2 h-[100px] rounded-lg bg-red-500 text-white text-2xl"
+        onClick={disconnect}>Logout put btn in nav
         </button>
     </div>
   )

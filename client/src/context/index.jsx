@@ -3,7 +3,6 @@
  import {useAddress,useContract,useMetamask,useContractWrite} from "@thirdweb-dev/react";
 
  import {ethers} from 'ethers';
-import { CommonSymbolSchema } from "@thirdweb-dev/sdk";
 
  const StateContext = createContext();
 
@@ -69,13 +68,13 @@ import { CommonSymbolSchema } from "@thirdweb-dev/sdk";
 
     {/**to accept doanation pId =>project Id given by thirdweb--- donateToCampaign dn smart contract*/}
     const donate = async (pId,amount) => {
-        const data = await contract.call('donateToCampaign' , pId,{value:ethers.utils.parseEther(amount)});
+        const data = await contract.call('donatetoCampaign' , pId,{value: ethers.utils.parseEther(amount)});
 
         return data;
     }
 
     const getDonations = async(pId) => {
-        const donations = await contract.all('getDonators', pId);
+        const donations = await contract.call('getDonators', pId);
         const numberofDonations = donations[0].length;
 
         const parsedDonations = [];
@@ -83,7 +82,7 @@ import { CommonSymbolSchema } from "@thirdweb-dev/sdk";
         for( let i = 0; i < numberofDonations; i++){
             parsedDonations.push({
                 donator : donations[0][i],
-                donation : ethers.utils.formatEther(donations[1][i].toString)
+                donation : ethers.utils.formatEther(donations[1][i].toString())
             })
         }
         return parsedDonations;

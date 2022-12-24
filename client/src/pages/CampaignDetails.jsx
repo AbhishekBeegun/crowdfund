@@ -10,7 +10,7 @@ import { thirdweb } from "../assets";
 const CampaignDetails = () => {
   {/*state buildin react func allow us to get info about campaign selected line 14 in DisplayCampaign when we navigate */}
   const {state} = useLocation();
-  const {getDonations,contract,address} = useStateContext();
+  const {getDonations,donate,contract,address} = useStateContext();
   
   const [isLoading, setisLoading] = useState(false);
   const [amount, setamount] = useState('');
@@ -20,21 +20,22 @@ const CampaignDetails = () => {
 
   const fetchDonators = async () => {
     const data = await getDonations(state.pId);
+    console.log(data)
     setdonators(data);
   }
   {/*ensure ki ena contract ek addres avn donation is sent */}
   useEffect(() => {
     if(contract) fetchDonators();
-
-  },[contract,address])
+  }, [contract,address])
 
 
   const handleDonate = async () => {
     setisLoading(true);
 
-    await donate(state.pId,amount);
-    setisLoading(false);
+    await donate(state.pId,amount); 
 
+    navigate('/')
+    setisLoading(false);
   }
 
 
@@ -94,9 +95,10 @@ const CampaignDetails = () => {
         </div>
 
          <div className="mt-5 flex flex-col gap-4">
-          {donators.lenght > 0 ? donators.map((item,index) =>(
-            <div>
-              donators
+          {donators.length > 0 ? donators.map((item,index) => (
+            <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
+              <p className="text-white">{index + 1}.{item.donator}</p>  
+              <p className="text-emerald-400">{item.donation}</p>            
             </div>
           )) : (
             <p className="font-epilogue text-base text-white">
@@ -127,7 +129,8 @@ const CampaignDetails = () => {
                 btnType="button"
                 title="Fund Campaign"
                 styles="w-full bg-[#8c6dfd]"
-                handleClick={handleDonate}/>
+                handleClick={handleDonate}
+          />
       </div>
 
      </div>
